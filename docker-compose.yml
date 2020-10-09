@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  training:
+    build: ./training/
+    volumes:  
+      - type: volume
+        source: model
+        target: /src/model
+  backend:
+    build: ./backend/
+    ports:
+      - "5000:5000"
+    volumes:  
+      - type: volume
+        source: model
+        target: /src/model
+  frontend:
+    build: ./frontend/
+    ports:
+      - "3000:3000"
+    volumes:  
+      - type: volume
+        source: model
+        target: /src/model
+volumes:
+  model:
